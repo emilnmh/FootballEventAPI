@@ -28,15 +28,6 @@ Latest commit 687e822 2 days ago
 @stuartpb@shiftkey@SimonSiefke@TennyZhuang@venatoria@ro31337@Richienb@melonmanchan@kachick@gouthamve@jucrouzet@cheddar
 126 lines (94 sloc)  1.94 KB
    
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

@@ -3,8 +3,7 @@
   "description": "API for Football event app",
   "version": "1.0.0",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js | bunyan"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -14,7 +13,6 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "gitignore": "^0.7.0",
-    "node-yaml-config": "0.0.6",
     "pg": "^8.7.1"
   },
   "devDependencies": {

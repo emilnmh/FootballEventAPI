@@ -1,17 +1,6 @@
-const { Pool } = require("pg");
-const ServerError = require("../../lib/error");
-require("dotenv").config();
+const sql = require("../../sql/sql");
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  max: 1,
-  idleTimeoutMillis: 10000,
-  connectionTimeoutMillis: 2000,
-});
+require("dotenv").config();
 
 /**
  * @param {Object} options
@@ -19,23 +8,8 @@ const pool = new Pool({
  * @return {Promise}
  */
 module.exports.getFields = async (options) => {
-  try {
-    const client = await pool.connect();
 
-    const query = "SELECT * FROM fields";
-    const res = await client.query(query);
+  const res = await sql.query(`SELECT * FROM fields`);
 
-    client.release();
-
-    return {
-      status: 200,
-      data: res.rows,
-    };
-  } catch (error) {
-    console.log(error);
-    throw new ServerError({
-      status: 500,
-      error: "Server Error",
-    });
-  }
+  return res.rows
 };

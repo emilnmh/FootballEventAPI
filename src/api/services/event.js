@@ -1,6 +1,5 @@
 const { Pool } = require("pg");
 const ServerError = require("../../lib/error");
-require("dotenv").config();
 
 const pool = new Pool({
   user: process.env.DB_USER,
