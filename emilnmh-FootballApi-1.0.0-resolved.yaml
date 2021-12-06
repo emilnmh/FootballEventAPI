@@ -1,0 +1,216 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    API for Football event app
+  version: 1.0.0
+  title: FootballApp
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /emilnmh/FootballApi/1.0.0
+tags:
+- name: user
+  description: Details about the user
+- name: field
+  description: Details about the field
+- name: event
+  description: Event details created by user
+schemes:
+- https
+- http
+paths:
+  /user:
+    post:
+      tags:
+      - user
+      summary: Creates a new user
+      operationId: createUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: User to be created
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "400":
+          description: Invalid input
+  /auth:
+    post:
+      tags:
+      - user
+      summary: Authorizes the user
+      operationId: authUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Username and password to be authorized.
+        required: true
+        schema:
+          $ref: '#/definitions/body'
+      responses:
+        "200":
+          description: User authorized
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Invalid input
+  /field:
+    get:
+      tags:
+      - field
+      summary: Returns all the fields
+      operationId: getFields
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Field'
+  /event/{field_id}:
+    get:
+      tags:
+      - event
+      - field
+      summary: Returns all events from the given field.
+      operationId: getEventsOfField
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: field_id
+        in: path
+        description: The field id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: No field with the given id
+    post:
+      tags:
+      - event
+      summary: Creates a new event of the field.
+      operationId: createEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: field_id
+        in: path
+        description: The field id
+        required: true
+        type: integer
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        "200":
+          description: OK
+        "405":
+          description: Invalid input
+  /event:
+    get:
+      summary: Returns all of todays events
+      operationId: getEvents
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Event'
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      username:
+        type: string
+      password:
+        type: string
+  Field:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      description:
+        type: string
+      location:
+        type: string
+      lat:
+        type: number
+        format: float
+      lon:
+        type: number
+        format: float
+      type:
+        type: string
+      owner:
+        type: integer
+        format: int32
+  Event:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      field_id:
+        type: integer
+        format: int32
+      max_participants:
+        type: integer
+        format: int32
+      owner:
+        type: integer
+        format: int32
+      descrition:
+        type: string
+      start_time:
+        type: string
+        format: date-time
+      end_time:
+        type: string
+        format: date-time
+  body:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io

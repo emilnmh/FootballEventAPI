@@ -1,0 +1,23 @@
+{
+  "name": "football-app",
+  "description": "API for Football event app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/bin/www",
+    "dev": "nodemon src/bin/www | bunyan"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "1.19.0",
+    "bunyan": "1.8.15",
+    "cookie-parser": "1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "gitignore": "^0.7.0",
+    "node-yaml-config": "0.0.6",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.7"
+  }
+}
