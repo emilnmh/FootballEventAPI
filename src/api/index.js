@@ -14,10 +14,10 @@ app.use(cookieParser());
 /*
  * Routes
  */
-app.use("/emilnmh/FootballApi/1.0.0/user", require("./routes/user"));
-app.use("/emilnmh/FootballApi/1.0.0/auth", require("./routes/auth"));
-app.use("/emilnmh/FootballApi/1.0.0/field", require("./routes/field"));
-app.use("/emilnmh/FootballApi/1.0.0/event", require("./routes/event"));
+app.use("/user", require("./routes/user"));
+app.use("/auth", require("./routes/auth"));
+app.use("/field", require("./routes/field"));
+app.use("/event", require("./routes/event"));
 
 // catch 404
 app.use((req, res, next) => {
