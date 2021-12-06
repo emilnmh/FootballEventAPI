@@ -1,5 +1,6 @@
 const express = require("express");
 const event = require("../services/event");
+const response = require("../../lib/response")
 
 const router = new express.Router();
 
@@ -13,7 +14,7 @@ router.get("/:field_id", async (req, res, next) => {
 
   try {
     const result = await event.getEventsOfField(options);
-    res.status(result.status || 200).send(result.data);
+    response.successResponse(res, result)
   } catch (err) {
     next(err);
   }

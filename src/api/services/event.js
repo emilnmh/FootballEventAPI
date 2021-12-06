@@ -1,16 +1,5 @@
-const { Pool } = require("pg");
+const sql = require("../../sql/sql");
 const ServerError = require("../../lib/error");
-
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  max: 1,
-  idleTimeoutMillis: 10000,
-  connectionTimeoutMillis: 2000,
-});
 
 /**
  * @param {Object} options
@@ -20,20 +9,14 @@ const pool = new Pool({
  */
 module.exports.getEventsOfField = async (options) => {
   try {
-    const client = pool.connect();
-
     const query =
-      "SELECT events.* FROM events, fields WHERE events.field = field.id AND field.id = $1";
+      "SELECT * FROM events WHERE field = $1";
     const values = [options.field_id];
 
-    const res = await client.query(query, values);
-    client.release();
-
-    return {
-      status: 200,
-      data: res,
-    };
+    const res = await sql.query(query, values);
+    return res.rows;
   } catch (error) {
+    console.log(error)
     throw new ServerError({
       status: 500,
       error: "Server Error",
